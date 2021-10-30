@@ -1,0 +1,2 @@
+## About Koa
+- Koa is a new web framework designed by the team behind Express, which aims to be a smaller, more expressive, and more robust foundation for web applications and APIs. Koa requires node v7.6.0 or higher for ES2015 and async function support.

@@ -1,0 +1,14 @@
+{
+  "name": "server-with-express",
+  "version": "1.0.0",
+  "description": "An attempt to create a server with express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yusuf",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
