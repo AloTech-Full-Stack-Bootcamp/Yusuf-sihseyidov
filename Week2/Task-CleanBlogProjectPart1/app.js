@@ -2,10 +2,11 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-// const path = require('path');
 const methodOverride = require('method-override');
 const ejs = require('ejs');
-const Post = require('./models/Post');
+const postController = require('./Controllers/postController');
+const pageController = require('./Controllers/pageController');
+
 
 //  Database Connection
 mongoose.connect('mongodb://localhost/cleanBlog-test-db', {
@@ -13,8 +14,10 @@ mongoose.connect('mongodb://localhost/cleanBlog-test-db', {
   useUnifiedTopology: true,
 });
 
+
 //  Middlewares
 app.use(express.static('public'));
+// Middleware that is used to simulate DELETE and PUT methods
 app.use(
   methodOverride('_method', {
     methods: ['GET', 'POST'],
@@ -24,58 +27,23 @@ app.use(
 app.use(express.urlencoded({ extended: true })); // reads url data
 app.use(express.json()); // converts url data to json format
 
+
 //  Template Engine
 app.set('view engine', 'ejs');
 
+
 //  Routes
-app.get('/', async (req, res) => {
-  const posts = await Post.find({}).sort('-dateCreated');
-  res.render('index', {
-    posts,
-  });
-});
+app.get('/', postController.getAllPosts);
+app.get('/posts/:id', postController.getPost);
+app.post('/posts', postController.createPost);
+app.put('/posts/:id', postController.updatePost);
+app.delete('/posts/:id', postController.deletePost);
 
-app.get('/about', (req, res) => {
-  res.render('about');
-});
+app.get('/about', pageController.getAboutPage);
+app.get('/add_post', pageController.getAddpostPage);
+app.get('/posts/edit/:id', pageController.getEditPage);
 
-app.get('/posts/:id', async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  res.render('post', {
-    post,
-  });
-  // res.render('post');
-});
-
-app.get('/add_post', (req, res) => {
-  res.render('add_post');
-});
-
-app.get('/posts/edit/:id', async (req, res) => {
-  const post = await Post.findOne({ _id: req.params.id });
-  res.render('edit', {
-    post,
-  });
-});
-
-app.post('/posts', async (req, res) => {
-  await Post.create(req.body);
-  res.redirect('/');
-});
-
-app.put('/posts/:id', async (req, res) => {
-  const post = await Post.findOne({ _id: req.params.id });
-  post.postTitle = req.body.postTitle;
-  post.postSubtitle = req.body.postSubtitle;
-  post.save();
-  res.redirect(`/posts/${req.params.id}`);
-});
-
-app.delete('/posts/:id', async (req, res) => {
-  await Post.findByIdAndRemove(req.params.id);
-  res.redirect('/');
-});
-
+// Not Found Page Controller
 app.get('*', (req, res) => {
   res.status(404).send('<h3>404-Page Not Found</h3>');
 });
