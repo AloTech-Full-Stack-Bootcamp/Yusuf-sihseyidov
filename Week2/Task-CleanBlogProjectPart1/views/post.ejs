@@ -69,8 +69,13 @@
         </div>
       </div>
     </div>
-  </article>
 
+    <div class="buttonsKeeper">
+      <a class="btn btn-primary float-right btn-update" href="/posts/edit/<%= post._id %>">Update Post</a>
+      <a class="btn btn-danger float-right btn-delete" href="/posts/<%= post._id %>?_method=DELETE" onclick=" return confirm('Are You Sure To Delete?')">Delete Post</a>
+    </div>
+
+  </article>
   <hr>
 
   <!-- Footer -->

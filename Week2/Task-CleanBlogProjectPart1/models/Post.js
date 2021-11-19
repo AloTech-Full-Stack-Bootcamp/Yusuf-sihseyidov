@@ -7,7 +7,7 @@ const postSchema = new Schema({
     postSubtitle: String,
     dateCreated: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
     },
 });
 

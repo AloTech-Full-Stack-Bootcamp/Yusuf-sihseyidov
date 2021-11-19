@@ -408,3 +408,13 @@ footer .copyright {
   font-size: 16px;
   padding: 25px 35px;
 }
+
+.buttonsKeeper{
+  height: 53px;
+  margin: 0 auto;
+  max-width: 685px;
+}
+
+.btn-delete{
+  margin-right: 7px;
+}
