@@ -9,7 +9,7 @@ const pageController = require('./Controllers/pageController');
 
 
 //  Database Connection
-mongoose.connect('mongodb://localhost/cleanBlog-test-db', {
+mongoose.connect('mongodb+srv://Yusuf:F5L6xn5WrX8Bb3h@cluster0.lwoix.mongodb.net/cleanblog-db?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -48,7 +48,7 @@ app.get('*', (req, res) => {
   res.status(404).send('<h3>404-Page Not Found</h3>');
 });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Sunucu port ${port}'de acildi...`);

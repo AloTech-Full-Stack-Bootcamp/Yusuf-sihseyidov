@@ -4,8 +4,7 @@
   "description": "- The bootcamp consists of three phases. First three weeks are dedicated to Node.js, and the other courses are React and Django consecutively.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
